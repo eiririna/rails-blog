@@ -7,7 +7,8 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
-    @article.user = User.first
+    @article.user = User.find(session[:user_id]) unless session[:user_id].nil?
+    logger.debug "Article user: #{@article.user}"
     logger.debug "New article: #{@article.attributes.inspect}"
     logger.debug "Article should be valid: #{@article.valid?}"
     if @article.save
@@ -28,7 +29,9 @@ class ArticlesController < ApplicationController
     redirect_to articles_path, status: :see_other
   end
 
-  def show; end
+  def show
+    @article = Article.find_by(id: params[:id].to_i)
+  end
 
   def edit; end
 
@@ -43,7 +46,7 @@ class ArticlesController < ApplicationController
   end
 
   def index
-    @articles = Article.all
+    @articles = Article.paginate(page: params[:page], per_page: 5)
   end
 
   private

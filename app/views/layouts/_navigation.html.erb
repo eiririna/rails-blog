@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -14,22 +14,19 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><%= link_to "Articles", articles_path %></li>
-        <li><%= link_to "Create Article", new_article_path %></li>
+        <li><%= link_to "Articles", articles_path, class: "navbar-link" %></li>
+        <li><%= link_to "Create Article", new_article_path, class: "navbar-link" %></li>
+        <li><%= link_to "Users", users_path, class: "navbar-link" %></li>
       </ul>
-
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-          </ul>
-        </li>
+      <ul class="nav navbar-right navbar-nav">
+        <% if logged_in? %>
+          <li>
+            <%= button_to "Log out", logout_path, method: :delete, class: "btn-xs btn-danger my-nav-button", onclick: "return ask(\"Are you sure?\");" %>
+          </li>
+        <% else %>
+          <li><%= button_to "Sign up", signup_path, method: :get, class: "btn-xs btn-warning my-nav-button" %></li>
+          <li><%= button_to "Log in", login_path, method: :get, class: "btn-xs btn-success my-nav-button" %></li>
+        <% end %>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
