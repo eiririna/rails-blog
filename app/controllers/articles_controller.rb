@@ -1,6 +1,5 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: %i[edit update show destroy]
-
   def new
     @article = Article.new
   end
@@ -58,4 +57,5 @@ class ArticlesController < ApplicationController
   def set_article
     @article = Article.find(params[:id])
   end
+
 end

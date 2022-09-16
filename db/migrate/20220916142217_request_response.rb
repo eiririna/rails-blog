@@ -1,4 +1,4 @@
-class CreateArticles < ActiveRecord::Migration[7.0]
+class RequestResponse < ActiveRecord::Migration[7.0]
   def change
     create_table :request_responses do |t|
       t.string :remote_ip, null:false
