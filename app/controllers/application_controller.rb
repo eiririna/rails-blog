@@ -28,5 +28,4 @@ class ApplicationController < ActionController::Base
       response_content_type: response.content_type
     )
   end
-
 end
